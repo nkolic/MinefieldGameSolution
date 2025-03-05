@@ -11,8 +11,26 @@ public class Board
         Rows = rows;
         Columns = columns;
         mines = new bool[rows, columns];
-        // TODO generate mines
+        GenerateMines(mineCount);
     }
+
+      private void GenerateMines(int mineCount)
+    {
+        Random rand = new Random();
+        int count = 0;
+        while (count < mineCount)
+        {
+            int x = rand.Next(Rows);
+            int y = rand.Next(Columns);
+            if (!mines[x, y])
+            {
+                mines[x, y] = true;
+                count++;
+            }
+        }
+    }
+
+    public bool IsMine(int x, int y) => mines[x, y];
 
     public void DisplayBoard(Player player)
     {
